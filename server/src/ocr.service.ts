@@ -7,12 +7,11 @@ import * as sharp from 'sharp';
 
 @Injectable()
 export class OcrService {
-  async recognizeTextFromImage(imagePath: string): Promise<string> {
+  async recognizeTextFromImage(imagePath: string, language: string): Promise<string> {
     try {
       const result = await Tesseract.recognize(
         imagePath,
-        'eng' // Язык для распознавания (можно указать другие языки)
-
+        language // Язык для распознавания (можно указать другие языки)
       );
       return result.data.text; // Вернет распознанный текст
     } catch (error) {
@@ -22,7 +21,7 @@ export class OcrService {
   }
 
   // Пример метода для получения пути к изображению
-  async saveImage(imageBuffer: Buffer): Promise<string> {
+  async saveImage(imageBuffer: Buffer, language: string): Promise<string> {
     const addedNumber = Math.random() * (0.2 - 0.1) + 0.1
     const filePath = path.join(__dirname, '..', 'uploads', `image${addedNumber}.jpg`);
     const outputPath = path.join(__dirname, '..', 'uploads', `enhanced_image${addedNumber}.jpeg`);
@@ -42,7 +41,7 @@ export class OcrService {
       throw error;
     }
 
-    return this.recognizeTextFromImage(outputPath)
+    return this.recognizeTextFromImage(outputPath, language)
   }
 
 

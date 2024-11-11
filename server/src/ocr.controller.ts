@@ -11,8 +11,9 @@ export class OcrController {
 
   @Post('recognize-text')
   @UseInterceptors(FileInterceptor('file'))
-  async recognizeText(@UploadedFile() file: Express.Multer.File) {
-    const result = await this.ocrService.saveImage(file.buffer)
+  async recognizeText(@UploadedFile() file: Express.Multer.File, @Body('language') language: string) {
+
+    const result = await this.ocrService.saveImage(file.buffer, language)
 
     const formattedName = {name: result.replace(/[^a-zA-Z]/g, '')}
     console.log(formattedName)
