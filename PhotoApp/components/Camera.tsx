@@ -2,24 +2,19 @@ import { CameraType, CameraView } from "expo-camera";
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 import { pickImage, takePicture } from "../utils";
-import { MedicineType, MessageType } from "../types";
-import { useState } from "react";
+import { Languages, MedicineType, MessageType } from "../types";
+import { useLanguage } from "../hooks";
 
 interface CameraProps {
     cameraRef: React.RefObject<CameraView>
     facing: CameraType
+    language: Languages
     setMedicine: React.Dispatch<React.SetStateAction<MedicineType | MessageType | null>>
     setFacing: React.Dispatch<React.SetStateAction<CameraType>>
+    setLanguage: React.Dispatch<React.SetStateAction<Languages>>
 }
 
-export enum Languages {
-  English = 'eng',
-  Russian = 'rus'
-}
-
-export function Camera({ cameraRef, facing, setMedicine, setFacing }: CameraProps) {
-
-    const [language, setLanguage] = useState<Languages>(Languages.English)
+export function Camera({ cameraRef, facing, language, setMedicine, setFacing, setLanguage }: CameraProps) {
 
     return (
         <CameraView style={styles.camera} ref={cameraRef} facing={facing}>

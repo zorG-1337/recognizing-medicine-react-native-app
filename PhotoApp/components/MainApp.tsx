@@ -1,7 +1,7 @@
 import { CameraType, CameraView, PermissionResponse } from "expo-camera";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { MainView } from "./MainView";
-import { MedicineType, MessageType } from "../types";
+import { Languages, MedicineType, MessageType } from "../types";
 
 interface MainAppProps {
     permission: PermissionResponse | null
@@ -9,13 +9,15 @@ interface MainAppProps {
     cameraRef: React.RefObject<CameraView>
     facing: CameraType
     startScreen: boolean
+    language: Languages
     requestPermission: () => Promise<PermissionResponse>
     setMedicine: React.Dispatch<React.SetStateAction<MedicineType | MessageType | null>>
     setFacing: React.Dispatch<React.SetStateAction<CameraType>>
     setStartScreen: React.Dispatch<React.SetStateAction<boolean>>
+    setLanguage: React.Dispatch<React.SetStateAction<Languages>>
 }
 
-export function MainApp({ permission, medicine, cameraRef, startScreen, facing, requestPermission, setMedicine, setFacing, setStartScreen}: MainAppProps) {
+export function MainApp({ permission, medicine, cameraRef, startScreen, facing, language, requestPermission, setMedicine, setFacing, setStartScreen, setLanguage}: MainAppProps) {
     return (
         <View style={styles.container}>
             {!permission ? (
@@ -30,10 +32,12 @@ export function MainApp({ permission, medicine, cameraRef, startScreen, facing, 
                 medicine={medicine} 
                 cameraRef={cameraRef} 
                 facing={facing} 
-                startScreen={startScreen} 
+                startScreen={startScreen}
+                language={language} 
                 setFacing={setFacing} 
                 setMedicine={setMedicine} 
                 setStartScreen={setStartScreen}
+                setLanguage={setLanguage}
         />
             }
         </View>
