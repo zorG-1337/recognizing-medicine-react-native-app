@@ -13,30 +13,7 @@ export class OcrController {
   @UseInterceptors(FileInterceptor('file'))
   async recognizeText(@UploadedFile() file: Express.Multer.File, @Body('language') language: string) {
 
-    const result = await this.ocrService.saveImage(file.buffer, language)
-
-    const formattedName = {name: result.replace(/[^a-zA-Z]/g, '')}
-    console.log(formattedName)
-
-    const result_db = await this.createMedicineService.findMedicineByName(formattedName)
-
-    if(result_db) {
-      return result_db
-    }
-
-    return {
-      message: "Ошибка. Препарат не найден в базе данных.",
-      formattedName: formattedName.name
-    }
-
-  }
-
-  @Post('test')
-  test(@Body() data: any) {
-    console.log(data)
-    return {
-      'jopa': 'zadnica'
-    }
+    return this.ocrService.saveImage(file.buffer, language)
   }
 }
 
