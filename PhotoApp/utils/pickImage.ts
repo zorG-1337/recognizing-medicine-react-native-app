@@ -1,8 +1,7 @@
 import * as ImagePicker from 'expo-image-picker';
 import { sendRecognizeText } from '../services/sendRecognizeText.service';
-import { MedicineType, MessageType } from '../types';
+import { Languages, MedicineType, MessageType } from '../types';
 import { copyFile } from './copyFile';
-import { Languages } from '../components';
 
 export const pickImage = async (setMedicine: React.Dispatch<React.SetStateAction<MedicineType | MessageType | null>>, language: Languages) => {
     try {

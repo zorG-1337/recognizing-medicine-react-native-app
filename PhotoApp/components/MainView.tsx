@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { Camera } from "./Camera";
 import { CameraType, CameraView } from "expo-camera";
-import { MedicineType, MessageType } from "../types";
+import { Languages, MedicineType, MessageType } from "../types";
 import { MedicineInfoScreen } from "./MedicineInfoScreen";
 import { NotFoundMedicineScreen } from "./NotFoundMedicineScreen";
 import { StartScreen } from "./StartScreen";
@@ -11,12 +11,14 @@ interface MainViewProps {
     cameraRef: React.RefObject<CameraView>
     facing: CameraType
     startScreen: boolean
+    language: Languages
     setMedicine: React.Dispatch<React.SetStateAction<MedicineType | MessageType | null>>
     setFacing: React.Dispatch<React.SetStateAction<CameraType>>
     setStartScreen: React.Dispatch<React.SetStateAction<boolean>>
+    setLanguage: React.Dispatch<React.SetStateAction<Languages>>
 }
 
-export function MainView({ medicine, cameraRef, startScreen, facing,  setMedicine, setFacing, setStartScreen }: MainViewProps) {
+export function MainView({ medicine, cameraRef, startScreen, facing, language, setMedicine, setFacing, setStartScreen, setLanguage }: MainViewProps) {
     return (
     <View style={styles.container}>
         {medicine && 'name' in medicine &&  (
@@ -31,7 +33,14 @@ export function MainView({ medicine, cameraRef, startScreen, facing,  setMedicin
             <StartScreen setStartScreen={setStartScreen}/>
         )
         }
-        <Camera cameraRef={cameraRef} facing={facing} setFacing={setFacing} setMedicine={setMedicine}/>
+        <Camera 
+            cameraRef={cameraRef} 
+            facing={facing} 
+            language={language}
+            setFacing={setFacing} 
+            setMedicine={setMedicine}
+            setLanguage={setLanguage}
+        />
     </View>
     )
 }

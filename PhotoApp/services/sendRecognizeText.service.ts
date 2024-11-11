@@ -1,5 +1,4 @@
-import { Languages } from "../components";
-import { MedicineType, MessageType } from "../types";
+import { Languages, MedicineType, MessageType } from "../types";
 
 export async function sendRecognizeText(newUri: string, setMedicine: React.Dispatch<React.SetStateAction<MedicineType | MessageType | null>>, language: Languages): Promise<void> {
     const fd = new FormData() as any

@@ -1,5 +1,5 @@
 import { useCameraPermissions } from 'expo-camera';
-import { useCameraView, useFacing, useMedicine, useStartScreen } from './hooks';
+import { useCameraView, useFacing, useLanguage, useMedicine, useStartScreen } from './hooks';
 import { MainApp } from './components/MainApp';
 
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
   const { cameraRef } = useCameraView()
   const { medicine, setMedicine } = useMedicine()
   const { startScreen, setStartScreen } = useStartScreen()
+  const { language, setLanguage } = useLanguage()
 
   return (
     <MainApp 
@@ -16,11 +17,13 @@ export default function App() {
         cameraRef={cameraRef} 
         facing={facing} 
         startScreen={startScreen}
+        language={language}
          
         setFacing={setFacing} 
         setMedicine={setMedicine} 
         setStartScreen={setStartScreen}
         requestPermission={requestPermission}
+        setLanguage={setLanguage}
       />
   );
 }
